@@ -1,0 +1,3 @@
+title=Segway
+author=Rupert Lloyd
+orientation=portrait

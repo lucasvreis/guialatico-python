@@ -1,0 +1,3 @@
+title=NXT Info
+author=Rupert Lloyd
+orientation=portrait
