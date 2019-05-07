@@ -1,3 +1,0 @@
-title=Tank
-author=Rupert Lloyd
-orientation=landscape

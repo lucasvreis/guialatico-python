@@ -171,7 +171,7 @@ def server_brick(host, port = 2727):
 def device_brick(filename):
     from . import devsock
     sock = devsock.find_bricks(filename=filename)
-    return sock.connect()
+    return sock[0].connect()
 
 
 def read_config(confpath=None, debug=False):

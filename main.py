@@ -1,7 +1,8 @@
+import os
+os.environ['KIVY_SDL2_PATH'] = '~/lib'
+import kivy
 from kivy.app import App
-
 from common.brickfinder import BrickFinderWidget
-
 class InfoApp(App):
     def build(self):
         bfw = BrickFinderWidget(title='NXT Demo',start=True)
