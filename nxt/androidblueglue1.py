@@ -1,14 +1,13 @@
-import jnius_config
-import os
-os.environ['CLASSPATH'] = 'java-src'
-jnius_config.set_classpath('.','java-src')
-from jnius import autoclass, cast
+
+import kivy
+from jnius import autoclass
+from jnius import cast
 
 RFCOMM=11
 
-GetArray = autoclass('org.lucasmagia.GetArray')
 BluetoothAdapter = autoclass('android.bluetooth.BluetoothAdapter')
 BluetoothDevice = autoclass('android.bluetooth.BluetoothDevice')
+BluetoothSocket = autoclass('android.bluetooth.BluetoothSocket')
 UUID = autoclass('java.util.UUID')
 
 def discover_devices(lookup_names=False):  # parameter is ignored
@@ -36,18 +35,20 @@ class BluetoothSocket:
             paired_devices = btAdapter.getBondedDevices().toArray()
             for device in paired_devices:
                 if device.getAddress() == addr:
+#                	socket = device.getClass().getMethod("createRfcommSocket", new Class[] {int.class}).invoke(device,1)
+#                	self._sock = cast("BluetoothSocket", socket)
                     try:
                         self._sock = device.createRfcommSocketToServiceRecord(UUID.fromString("00001101-0000-1000-8000-00805f9b34fb"))
                     except:
                         print("Socket error")
                     try:
-                        self._sock.connect()
+                        self._sock.connect();
                         print("Connected")
                     except:
                         print("Fallback")
-                        self._sock = cast('android.bluetooth.BluetoothSocket', device.getClass().getMethod("createRfcommSocket", GetArray.getArrat()).invoke(device,1))
+                        self._sock = cast(android.bluetooth.BluetoothSocket,
+                                                        device.getClass().getMethod("createRfcommSocket", new Class[] {int.class}).invoke(device,1))
                         self._sock.connect()
-
     def send(self, data):
         print('send',data)
         send_stream = self._sock.getOutputStream()

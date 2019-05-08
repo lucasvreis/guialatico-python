@@ -1,4 +1,4 @@
-// roubado de https://stackoverflow.com/questions/18657427/ioexception-read-failed-socket-might-closed-bluetooth-on-android-4-3?rq=1
+package org.lucasmagia;
 
 import java.io.IOException;
 import java.io.InputStream;
